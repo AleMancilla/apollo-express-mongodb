@@ -1,10 +1,12 @@
 const { connect } = require("mongoose");
 
 const connectDb = async () => {
-  try {
-    await connect(process.env.MONGODB_URI || "mongodb://localhost/tasksdb");
-    console.log("Mongodb connected");
+    console.log(" === > intentando conectar");
+    try {
+    await connect( "mongodb://localhost:27023");
+    console.log(" === > Mongodb connected");
   } catch (error) {
+    console.log(" === > Mongodb error to connect");
     console.error(error);
   }
 };

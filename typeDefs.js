@@ -9,6 +9,7 @@ const typeDefs = gql`
 
   type Query {
     hello: String
+    hello1: String
     getAllTasks: [Task]
     getTask(id: ID): Task
   }

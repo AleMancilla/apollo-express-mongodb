@@ -12,11 +12,11 @@ app.get("/", (req, res) => {
 });
 
 async function start() {
+  // iniciando apollo server
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
   });
-
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, path: "/api" });
 
@@ -24,9 +24,10 @@ async function start() {
     res.status(404).send("not found");
   });
 
-  app.listen(process.env.PORT || 3000, () =>
-    console.log("Server on port", process.env.PORT || 3000)
+  app.listen(3000, () =>
+    console.log("Server on port",  3000)
   );
+
 }
 
 start();

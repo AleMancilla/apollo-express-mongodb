@@ -2,7 +2,8 @@ const Task = require("./models/Task");
 
 const resolvers = {
   Query: {
-    hello: () => "Hello world",
+    hello: () => "Hello worlssssd",
+    hello1: () => "Hello wasdasdorlssssd",
     getAllTasks: async () => {
       const tasks = await Task.find();
       return tasks;
