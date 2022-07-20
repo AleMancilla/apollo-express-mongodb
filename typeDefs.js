@@ -1,28 +1,42 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type Task {
-    id: ID
-    title: String
-    description: String
+  type Usuario {
+    ci: String
+    nombre: String
+    ap_paterno: String
+    ap_materno: String
+    fecha_nac: String
+  }
+  type Materia {
+    sigla: String
+    nombre: String
+    horario: String
+  }
+
+  type Inscritos {
+    ci_usuario: String
+    sigla_materia: String
   }
 
   type Query {
     hello: String
-    hello1: String
-    getAllTasks: [Task]
-    getTask(id: ID): Task
+    getAllUsers: [Usuario]
+    getUser(ci: String): Usuario
   }
 
-  input TaskInput {
-    title: String
-    description: String
+  input UserInput {
+    ci: String
+    nombre: String
+    ap_paterno: String
+    ap_materno: String
+    fecha_nac: String
   }
 
   type Mutation {
-    createTask(task: TaskInput): Task
-    deleteTask(id: ID): String
-    updateTask(id: ID, task: TaskInput): Task
+    createUser(usuario: UserInput): Usuario
+    # deleteTask(id: ID): String
+    # updateTask(id: ID, task: TaskInput): Task
   }
 `;
 
