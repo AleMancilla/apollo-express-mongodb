@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema({
   ci: {
     type: String,
-    required: true,
   },
   nombre: {
     type: String,

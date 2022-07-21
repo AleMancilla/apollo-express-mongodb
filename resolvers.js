@@ -9,36 +9,96 @@ const resolvers = {
       const user = await Usuario.find();
       return user;
     },
-    async getUser(_, { ci }) {
-      return await Usuario.findById(ci);
+    async getUser(_, { id }) {
+      return await Usuario.findById(id);
+    },
+    async getMateria(_, { id }) {
+      return await Materia.findById(id);
+    },
+    async getInscrito(_, { id }) {
+      return await Inscrito.findById(id);
     },
   },
   Mutation: {
-    async createUser(parent, { usuario }, context, info) {
+    // CREANDO DATOS
+    async createUsuario(parent, { usuario }, context, info) {
       const { ci, nombre, ap_paterno, ap_materno, fecha_nac } = usuario;
       const nuevoUsuario = new Usuario({ ci, nombre, ap_paterno, ap_materno, fecha_nac });
       await nuevoUsuario.save();
       return nuevoUsuario;
     },
-    // async deleteTask(_, { id }) {
-    //   await usuario.findByIdAndDelete(id);
-    //   return "Task Deleted";
-    // },
-    // async updateTask(_, { id, task }) {
-    //   const { title, description } = task;
-    //   const newTask = await usuario.findByIdAndUpdate(
-    //     id,
+    async createMateria(parent, { materia }, context, info) {
+      const { sigla,nombre,horario } = materia;
+      const nuevoMateria = new Materia({ sigla,nombre,horario });
+      await nuevoMateria.save();
+      return nuevoMateria;
+    },
+    async createInscritos(parent, { inscrito }, context, info) {
+      const { ci_usuario, sigla_materia } = inscrito;
+      const nuevoInscrito = new Inscrito({ ci_usuario, sigla_materia });
+      await nuevoInscrito.save();
+      return nuevoInscrito;
+    },
+
+    // BORRANDO DATOS
+    async deleteUsuario(_, { id }) {
+      await Usuario.findByIdAndDelete(id);
+      return "Usuario Borrado";
+    },
+    async deleteMateria(_, { id }) {
+      await Materia.findByIdAndDelete(id);
+      return "Materia Borrada";
+    },
+    async deleteInscrito(_, { id  }) {
+      
+      await Inscrito.findByIdAndDelete(id);
+      return "Inscrito Borrado";
+    },
+    // ACTUALIZANDO DATOS
+    async updateUsuario(_, { id, usuario }) {
+      const {  ci, nombre, ap_paterno, ap_materno, fecha_nac } = usuario;
+      const newUsuario = await Usuario.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+             ci, nombre, ap_paterno, ap_materno, fecha_nac
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      return newUsuario;
+    },
+    async updateMateria(_, { id, materia }) {
+      const {  sigla, nombre,horario } = materia;
+      const newMateria = await Materia.findByIdAndUpdate(
+        id,
+        {
+          $set: {
+            sigla, nombre,horario
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      return newMateria;
+    },
+    // async updateInscritos(_, { sigla, inscrito }) {
+    //   const {  ci_usuario, sigla_materia  } = inscrito;
+    //   const newInscrito = await Inscrito.findByIdAndUpdate(
+    //     sigla,
     //     {
     //       $set: {
-    //         title,
-    //         description,
+    //          ci_usuario, sigla_materia 
     //       },
     //     },
     //     {
     //       new: true,
     //     }
     //   );
-    //   return newTask;
+    //   return newInscrito;
     // },
   },
 };

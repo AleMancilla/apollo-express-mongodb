@@ -2,6 +2,7 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Usuario {
+    id: ID
     ci: String
     nombre: String
     ap_paterno: String
@@ -9,12 +10,14 @@ const typeDefs = gql`
     fecha_nac: String
   }
   type Materia {
+    id: ID
     sigla: String
     nombre: String
     horario: String
   }
 
   type Inscritos {
+    id: ID
     ci_usuario: String
     sigla_materia: String
   }
@@ -22,7 +25,9 @@ const typeDefs = gql`
   type Query {
     hello: String
     getAllUsers: [Usuario]
-    getUser(ci: String): Usuario
+    getUser(id: ID): Usuario
+    getMateria(id: ID): Materia
+    getInscrito(id: ID): Inscritos
   }
 
   input UserInput {
@@ -32,10 +37,25 @@ const typeDefs = gql`
     ap_materno: String
     fecha_nac: String
   }
+  input MateriaInput {
+    sigla: String
+    nombre: String
+    horario: String
+  }
+  input InscritosInput {
+    ci_usuario: String
+    sigla_materia: String
+  }
 
   type Mutation {
-    createUser(usuario: UserInput): Usuario
-    # deleteTask(id: ID): String
+    createUsuario(usuario: UserInput): Usuario
+    createMateria(materia: MateriaInput): Materia
+    createInscritos(inscrito: InscritosInput): Inscritos
+    deleteUsuario(id: ID): String
+    deleteMateria(id: ID): String
+    deleteInscrito(id: ID): String
+    updateUsuario(id: ID, usuario: UserInput): Usuario
+    updateMateria(id: ID, materia: MateriaInput): Usuario
     # updateTask(id: ID, task: TaskInput): Task
   }
 `;
