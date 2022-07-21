@@ -9,6 +9,14 @@ const resolvers = {
       const user = await Usuario.find();
       return user;
     },
+    getAllMaterias: async () => {
+      const user = await Materia.find();
+      return user;
+    },
+    getAllInscritos: async () => {
+      const user = await Inscrito.find();
+      return user;
+    },
     async getUser(_, { id }) {
       return await Usuario.findById(id);
     },

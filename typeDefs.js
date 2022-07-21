@@ -25,6 +25,8 @@ const typeDefs = gql`
   type Query {
     hello: String
     getAllUsers: [Usuario]
+    getAllMaterias: [Materia]
+    getAllInscritos: [Inscritos]
     getUser(id: ID): Usuario
     getMateria(id: ID): Materia
     getInscrito(id: ID): Inscritos
