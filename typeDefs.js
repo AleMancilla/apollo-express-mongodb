@@ -52,12 +52,12 @@ const typeDefs = gql`
   type Mutation {
     createUsuario(usuario: UserInput): Usuario
     createMateria(materia: MateriaInput): Materia
+    updateUsuario(id: ID, usuario: UserInput): Usuario
+    updateMateria(id: ID, materia: MateriaInput): Usuario
     createInscritos(inscrito: InscritosInput): Inscritos
     deleteUsuario(id: ID): String
     deleteMateria(id: ID): String
     deleteInscrito(id: ID): String
-    updateUsuario(id: ID, usuario: UserInput): Usuario
-    updateMateria(id: ID, materia: MateriaInput): Usuario
     # updateTask(id: ID, task: TaskInput): Task
   }
 `;

@@ -30,18 +30,42 @@ const resolvers = {
   Mutation: {
     // CREANDO DATOS
     async createUsuario(parent, { usuario }, context, info) {
+      console.log("----------------------------------");
+      console.log("========== PARENT ============");
+      console.log(parent);
+      console.log("========== CONTEXT ============");
+      console.log(context);
+      console.log("========== INFO ============");
+      console.log(info);
+      console.log("----------------------------------");
       const { ci, nombre, ap_paterno, ap_materno, fecha_nac } = usuario;
       const nuevoUsuario = new Usuario({ ci, nombre, ap_paterno, ap_materno, fecha_nac });
       await nuevoUsuario.save();
       return nuevoUsuario;
     },
     async createMateria(parent, { materia }, context, info) {
+      console.log("----------------------------------");
+      console.log("========== PARENT ============");
+      console.log(parent);
+      console.log("========== CONTEXT ============");
+      console.log(context);
+      console.log("========== INFO ============");
+      console.log(info);
+      console.log("----------------------------------");
       const { sigla,nombre,horario } = materia;
       const nuevoMateria = new Materia({ sigla,nombre,horario });
       await nuevoMateria.save();
       return nuevoMateria;
     },
     async createInscritos(parent, { inscrito }, context, info) {
+      console.log("----------------------------------");
+      console.log("========== PARENT ============");
+      console.log(parent);
+      console.log("========== CONTEXT ============");
+      console.log(context);
+      console.log("========== INFO ============");
+      console.log(info);
+      console.log("----------------------------------");
       const { ci_usuario, sigla_materia } = inscrito;
       const nuevoInscrito = new Inscrito({ ci_usuario, sigla_materia });
       await nuevoInscrito.save();
@@ -50,10 +74,14 @@ const resolvers = {
 
     // BORRANDO DATOS
     async deleteUsuario(_, { id }) {
+      console.log(_);
+      console.log("----------------------------------");
       await Usuario.findByIdAndDelete(id);
       return "Usuario Borrado";
     },
     async deleteMateria(_, { id }) {
+      console.log(_);
+      console.log("----------------------------------");
       await Materia.findByIdAndDelete(id);
       return "Materia Borrada";
     },
@@ -64,6 +92,8 @@ const resolvers = {
     },
     // ACTUALIZANDO DATOS
     async updateUsuario(_, { id, usuario }) {
+      console.log(_);
+      console.log("----------------------------------");
       const {  ci, nombre, ap_paterno, ap_materno, fecha_nac } = usuario;
       const newUsuario = await Usuario.findByIdAndUpdate(
         id,
@@ -79,6 +109,8 @@ const resolvers = {
       return newUsuario;
     },
     async updateMateria(_, { id, materia }) {
+      console.log(_);
+      console.log("----------------------------------");
       const {  sigla, nombre,horario } = materia;
       const newMateria = await Materia.findByIdAndUpdate(
         id,
@@ -114,3 +146,4 @@ const resolvers = {
 module.exports = {
   resolvers,
 };
+
